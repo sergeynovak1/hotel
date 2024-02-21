@@ -7,6 +7,10 @@ from phonenumber_field.phonenumber import to_python
 class City(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
+    class Meta:
+        verbose_name = 'City'
+        verbose_name_plural = 'Cities'
+
     def __str__(self):
         return self.name
 
@@ -14,7 +18,7 @@ class City(models.Model):
 class Hotel(models.Model):
     name = models.CharField(max_length=255)
     address = models.CharField(max_length=255)
-    phone = PhoneNumberField(unique=True, help_text="phone")
+    phone = PhoneNumberField(unique=True)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
